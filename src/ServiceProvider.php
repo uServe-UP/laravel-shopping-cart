@@ -1,6 +1,6 @@
 <?php
 
-namespace Melihovv\ShoppingCart;
+namespace sky2002\ShoppingCart;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
