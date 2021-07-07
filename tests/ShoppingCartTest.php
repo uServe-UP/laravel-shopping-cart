@@ -1,10 +1,10 @@
 <?php
 
-namespace Melihovv\ShoppingCart\Tests;
+namespace sky2002\ShoppingCart\Tests;
 
 use Illuminate\Support\Collection;
-use Melihovv\ShoppingCart\Coupons\FixedDiscountCoupon;
-use Melihovv\ShoppingCart\Coupons\PercentDiscountCoupon;
+use sky2002\ShoppingCart\Coupons\FixedDiscountCoupon;
+use sky2002\ShoppingCart\Coupons\PercentDiscountCoupon;
 use Orchestra\Testbench\TestCase;
 
 class ShoppingCartTest extends TestCase
