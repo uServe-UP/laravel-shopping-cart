@@ -16,12 +16,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Melihovv\\ShoppingCart\\": "src"
+      "Sky2002\\ShoppingCart\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Melihovv\\ShoppingCart\\Tests\\": "tests"
+      "Sky2002\\ShoppingCart\\Tests\\": "tests"
     }
   },
   "require": {
@@ -43,7 +43,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Melihovv\\ShoppingCart\\ServiceProvider"
+        "Sky2002\\ShoppingCart\\ServiceProvider"
       ]
     }
   },
