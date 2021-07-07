@@ -1,11 +1,11 @@
 <?php
 
-namespace Melihovv\ShoppingCart\Tests;
+namespace sky2002\ShoppingCart\Tests;
 
 use Illuminate\Support\Collection;
-use Melihovv\ShoppingCart\CartItem;
-use Melihovv\ShoppingCart\Facades\ShoppingCart;
-use Melihovv\ShoppingCart\ServiceProvider;
+use sky2002\ShoppingCart\CartItem;
+use sky2002\ShoppingCart\Facades\ShoppingCart;
+use sky2002\ShoppingCart\ServiceProvider;
 
 trait ShoppingCartTester
 {
