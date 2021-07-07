@@ -1,6 +1,6 @@
 <?php
 
-namespace Melihovv\ShoppingCart;
+namespace sky2002\ShoppingCart;
 
 use Illuminate\Support\Collection;
 use Melihovv\ShoppingCart\Coupons\Coupon;
