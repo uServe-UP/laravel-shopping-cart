@@ -1,6 +1,6 @@
 <?php
 
-namespace Melihovv\ShoppingCart\Coupons;
+namespace sky2002\ShoppingCart\Coupons;
 
 abstract class Coupon
 {
