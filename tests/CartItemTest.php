@@ -1,8 +1,8 @@
 <?php
 
-namespace Melihovv\ShoppingCart\Tests;
+namespace sky2002\ShoppingCart\Tests;
 
-use Melihovv\ShoppingCart\CartItem;
+use sky2002\ShoppingCart\CartItem;
 use Orchestra\Testbench\TestCase;
 
 class CartItemTest extends TestCase
