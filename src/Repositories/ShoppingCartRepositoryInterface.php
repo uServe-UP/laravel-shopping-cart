@@ -1,6 +1,6 @@
 <?php
 
-namespace sky2002\ShoppingCart\Repositories;
+namespace Sky2002\ShoppingCart\Repositories;
 
 use stdClass;
 
