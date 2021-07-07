@@ -238,8 +238,3 @@ Cart::add(1, 'iPad Pro', 700, 2);
 Cart::addCoupon(new FixedDiscountCoupon($name, 300));
 Cart::getTotal(); // return 1900 - 300 = 1600
 ```
-
-## Credits
-
-- [Alexander Melihov](https://github.com/sky2002)
-- [All contributors](https://github.com/sky2002/laravel-shopping-cart/graphs/contributors)
