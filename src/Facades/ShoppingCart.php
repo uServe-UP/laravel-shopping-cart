@@ -1,6 +1,6 @@
 <?php
 
-namespace sky2002\ShoppingCart\Facades;
+namespace Sky2002\ShoppingCart\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
