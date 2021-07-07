@@ -3,8 +3,8 @@
 namespace sky2002\ShoppingCart;
 
 use Illuminate\Support\Collection;
-use Melihovv\ShoppingCart\Coupons\Coupon;
-use Melihovv\ShoppingCart\Repositories\ShoppingCartRepositoryInterface;
+use sky2002\ShoppingCart\Coupons\Coupon;
+use sky2002\ShoppingCart\Repositories\ShoppingCartRepositoryInterface;
 
 class ShoppingCart
 {
