@@ -1,10 +1,10 @@
 <?php
 
-namespace sky2002\ShoppingCart;
+namespace Sky2002\ShoppingCart;
 
 use Illuminate\Support\Collection;
-use sky2002\ShoppingCart\Coupons\Coupon;
-use sky2002\ShoppingCart\Repositories\ShoppingCartRepositoryInterface;
+use Sky2002\ShoppingCart\Coupons\Coupon;
+use Sky2002\ShoppingCart\Repositories\ShoppingCartRepositoryInterface;
 
 class ShoppingCart
 {
