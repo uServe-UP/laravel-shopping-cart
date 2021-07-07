@@ -1,6 +1,6 @@
 <?php
 
-namespace sky2002\ShoppingCart\Coupons;
+namespace Sky2002\ShoppingCart\Coupons;
 
 class FixedDiscountCoupon extends Coupon
 {
