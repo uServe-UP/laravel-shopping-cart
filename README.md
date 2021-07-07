@@ -239,10 +239,6 @@ Cart::addCoupon(new FixedDiscountCoupon($name, 300));
 Cart::getTotal(); // return 1900 - 300 = 1600
 ```
 
-## Security
-
-If you discover any security related issues, please email asky2002@ya.ru instead of using the issue tracker.
-
 ## Credits
 
 - [Alexander Melihov](https://github.com/sky2002)
