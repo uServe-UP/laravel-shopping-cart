@@ -1,6 +1,6 @@
 <?php
 
-namespace Melihovv\ShoppingCart\Tests;
+namespace sky2002\ShoppingCart\Tests;
 
 use Orchestra\Testbench\TestCase;
 
