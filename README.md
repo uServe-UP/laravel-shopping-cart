@@ -1,5 +1,10 @@
 Laravel Shopping Cart
 =====================
+This Shopping Cart is From  melihovv/laravel-shopping-cart.
+
+Because melihovv/laravel-shopping-cart has been archived. I copied the files and update.
+
+
 
 [![GitHub Workflow Status](https://github.com/sky2002/laravel-shopping-cart/workflows/Run%20tests/badge.svg)](https://github.com/sky2002/laravel-shopping-cart/actions)
 [![styleci](https://styleci.io/repos/95455977/shield)](https://styleci.io/repos/95455977)
