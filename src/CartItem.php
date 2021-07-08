@@ -119,7 +119,7 @@ class CartItem implements Arrayable
     {
         ksort($this->options);
 
-        return uniqid($this->id,$this->id.serialize($this->options));
+        return $this->id."-".md5($this->id.serialize($this->options));
     }
 
     /**
