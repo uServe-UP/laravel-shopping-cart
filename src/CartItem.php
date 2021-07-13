@@ -52,6 +52,13 @@ class CartItem implements Arrayable
      * @var array
      */
     public $options;
+    
+    /**
+     * The total price of the cart item.
+     *
+     * @var float
+     */
+    public $total;
 
     /**
      * CartItem constructor.
@@ -64,7 +71,7 @@ class CartItem implements Arrayable
      *
      * @throws InvalidArgumentException
      */
-    public function __construct($id, $name, $price, $quantity, array $options = [])
+    public function __construct($id, $name, $price, $quantity,$total, array $options = [])
     {
         if (empty($id)) {
             throw new InvalidArgumentException('Please supply a valid identifier.');
@@ -81,12 +88,17 @@ class CartItem implements Arrayable
         if (! is_int($quantity) || strlen($quantity) < 0) {
             throw new InvalidArgumentException('Please supply a valid quantity.');
         }
+        
+        if (! is_numeric($total) || strlen($total) < 0) {
+            throw new InvalidArgumentException('Please supply a valid total.');
+        }
 
         $this->id = $id;
         $this->name = $name;
         $this->price = (float) $price;
         $this->quantity = (int) $quantity;
         $this->options = $options;
+        $this->price = (float) $total;
         $this->uniqueId = $this->generateUniqueId();
     }
 
@@ -106,6 +118,7 @@ class CartItem implements Arrayable
             $attributes['name'],
             $attributes['price'],
             $attributes['quantity'],
+            $attributes['total'],
             Arr::get($attributes, 'options', [])
         );
     }
@@ -158,6 +171,7 @@ class CartItem implements Arrayable
             'price' => $this->price,
             'quantity' => $this->quantity,
             'options' => $this->options,
+            'total' => $this->total,
         ];
     }
 }
