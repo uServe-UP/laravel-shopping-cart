@@ -71,9 +71,9 @@ class ShoppingCart
      *
      * @return CartItem
      */
-    public function add($id, $name, $price, $quantity, $options = [])
+    public function add($id, $name, $price, $quantity, $total, $options = [])
     {
-        $cartItem = new CartItem($id, $name, $price, $quantity, $options);
+        $cartItem = new CartItem($id, $name, $price, $quantity, $total, $options);
         $uniqueId = $cartItem->getUniqueId();
 
         if ($this->content->has($uniqueId)) {
