@@ -52,7 +52,7 @@ class CartItem implements Arrayable
      * @var array
      */
     public $options;
-    
+
     /**
      * The total price of the cart item.
      *
@@ -88,7 +88,7 @@ class CartItem implements Arrayable
         if (! is_int($quantity) || strlen($quantity) < 0) {
             throw new InvalidArgumentException('Please supply a valid quantity.');
         }
-        
+
         if (! is_numeric($total) || strlen($total) < 0) {
             throw new InvalidArgumentException('Please supply a valid total.');
         }
@@ -98,7 +98,7 @@ class CartItem implements Arrayable
         $this->price = (float) $price;
         $this->quantity = (int) $quantity;
         $this->options = $options;
-        $this->price = (float) $total;
+        $this->total = (float) $total;
         $this->uniqueId = $this->generateUniqueId();
     }
 
