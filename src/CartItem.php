@@ -64,14 +64,14 @@ class CartItem implements Arrayable
      * CartItem constructor.
      *
      * @param int|string $id
-     * @param string     $name
-     * @param int|float  $price
-     * @param int        $quantity
-     * @param array      $options
+     * @param string $name
+     * @param int|float $price
+     * @param int $quantity
+     * @param array $options
      *
      * @throws InvalidArgumentException
      */
-    public function __construct($id, $name, $price, $quantity,$total, array $options = [])
+    public function __construct($id, $name, $price, $quantity, $total, array $options = [])
     {
         if (empty($id)) {
             throw new InvalidArgumentException('Please supply a valid identifier.');
@@ -81,24 +81,24 @@ class CartItem implements Arrayable
             throw new InvalidArgumentException('Please supply a valid name.');
         }
 
-        if (! is_numeric($price) || strlen($price) < 0) {
+        if (!is_numeric($price) || strlen($price) < 0) {
             throw new InvalidArgumentException('Please supply a valid price.');
         }
 
-        if (! is_int($quantity) || strlen($quantity) < 0) {
+        if (!is_int($quantity) || strlen($quantity) < 0) {
             throw new InvalidArgumentException('Please supply a valid quantity.');
         }
 
-        if (! is_numeric($total) || strlen($total) < 0) {
+        if (!is_numeric($total) || strlen($total) < 0) {
             throw new InvalidArgumentException('Please supply a valid total.');
         }
 
         $this->id = $id;
         $this->name = $name;
-        $this->price = (float) $price;
-        $this->quantity = (int) $quantity;
+        $this->price = (float)$price;
+        $this->quantity = (int)$quantity;
         $this->options = $options;
-        $this->total = (float) $total;
+        $this->total = (float)$total;
         $this->uniqueId = $this->generateUniqueId();
     }
 
@@ -107,9 +107,9 @@ class CartItem implements Arrayable
      *
      * @param array $attributes
      *
+     * @return $this
      * @throws InvalidArgumentException
      *
-     * @return $this
      */
     public static function fromArray(array $attributes)
     {
@@ -132,7 +132,7 @@ class CartItem implements Arrayable
     {
         ksort($this->options);
 
-        return $this->id."-".md5($this->id.serialize($this->options));
+        return $this->id . "-" . md5($this->id . serialize($this->options));
     }
 
     /**
@@ -155,6 +155,18 @@ class CartItem implements Arrayable
     public function getTotal()
     {
         return $this->price * $this->quantity;
+    }
+
+    /**
+     * Get total option price.
+     *
+     * Total option price = option price * quantity.
+     *
+     * @return float
+     */
+    public function getItemWithOptionTotal()
+    {
+        return $this->total;
     }
 
     /**
