@@ -184,7 +184,7 @@ class ShoppingCart
     public function getTotal()
     {
         return $this->content->sum(function (CartItem $cartItem) {
-            return $cartItem->getTotal();
+            return $cartItem->getItemWithOptionTotal();
         });
     }
 
