@@ -45,6 +45,13 @@ class ShoppingCart
     private $coupons;
 
     /**
+     * Store Infomations.
+     *
+     * @var Collection
+     */
+    private $storeInfo;
+
+    /**
      * ShoppingCart constructor.
      *
      * @param ShoppingCartRepositoryInterface $repo
@@ -55,6 +62,7 @@ class ShoppingCart
         $this->instance(self::DEFAULT_INSTANCE_NAME);
         $this->content = new Collection();
         $this->coupons = new Collection();
+        $this->storeInfo = new Collection();
     }
 
     /**
@@ -64,10 +72,10 @@ class ShoppingCart
      * quantity.
      *
      * @param string|int $id
-     * @param string     $name
-     * @param int|float  $price
-     * @param int        $quantity
-     * @param array      $options
+     * @param string $name
+     * @param int|float $price
+     * @param int $quantity
+     * @param array $options
      *
      * @return CartItem
      */
@@ -135,6 +143,25 @@ class ShoppingCart
     public function content()
     {
         return $this->content;
+    }
+
+    /**
+     * Get shopping cart content.
+     *
+     * @return Collection
+     */
+    public function storeInfo()
+    {
+        return $this->storeInfo;
+    }
+
+    /**
+     * Get the store infomations.
+     * @param $storeInfo
+     */
+    public function setStoreInfo($storeInfo)
+    {
+        $this->storeInfo = $storeInfo;
     }
 
     /**
@@ -270,6 +297,7 @@ class ShoppingCart
             json_encode(serialize([
                 'content' => $this->content,
                 'coupons' => $this->coupons,
+                'store-info' => $this->storeInfo,
             ]))
         );
 
@@ -292,8 +320,10 @@ class ShoppingCart
         }
 
         $unserialized = unserialize(json_decode($cart->content));
+
         $this->content = $unserialized['content'];
         $this->coupons = $unserialized['coupons'];
+        $this->storeInfo = $unserialized['store-info'];
 
         $this->instance($cart->instance);
 
