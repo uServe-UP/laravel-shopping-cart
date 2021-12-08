@@ -67,11 +67,13 @@ class CartItem implements Arrayable
      * @param string $name
      * @param int|float $price
      * @param int $quantity
+     * @param int $tax
+     * @param int $total
      * @param array $options
      *
      * @throws InvalidArgumentException
      */
-    public function __construct($id, $name, $price, $quantity, $total, array $options = [])
+    public function __construct($id, $name, $price, $quantity, $tax, $total, array $options = [])
     {
         if (empty($id)) {
             throw new InvalidArgumentException('Please supply a valid identifier.');
@@ -89,6 +91,10 @@ class CartItem implements Arrayable
             throw new InvalidArgumentException('Please supply a valid quantity.');
         }
 
+        if (!is_numeric($tax) || strlen($tax) < 0) {
+            throw new InvalidArgumentException('Please supply a valid total.');
+        }
+
         if (!is_numeric($total) || strlen($total) < 0) {
             throw new InvalidArgumentException('Please supply a valid total.');
         }
@@ -97,8 +103,9 @@ class CartItem implements Arrayable
         $this->name = $name;
         $this->price = (float)$price;
         $this->quantity = (int)$quantity;
-        $this->options = $options;
+        $this->tax = (float)$tax;
         $this->total = (float)$total;
+        $this->options = $options;
         $this->uniqueId = $this->generateUniqueId();
     }
 
@@ -118,6 +125,7 @@ class CartItem implements Arrayable
             $attributes['name'],
             $attributes['price'],
             $attributes['quantity'],
+            $attributes['tax'],
             $attributes['total'],
             Arr::get($attributes, 'options', [])
         );
@@ -158,6 +166,18 @@ class CartItem implements Arrayable
     }
 
     /**
+     * Get total price.
+     *
+     * Total tax.
+     *
+     * @return float
+     */
+    public function getTax()
+    {
+        return $this->tax;
+    }
+
+    /**
      * Get total option price.
      *
      * Total option price = option price * quantity.
@@ -183,6 +203,7 @@ class CartItem implements Arrayable
             'price' => $this->price,
             'quantity' => $this->quantity,
             'options' => $this->options,
+            'tax' => $this->tax,
             'total' => $this->total,
         ];
     }
