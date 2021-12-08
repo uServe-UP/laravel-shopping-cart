@@ -40,6 +40,13 @@ class CartItem implements Arrayable
     public $price;
 
     /**
+     * The tax of the cart item.
+     *
+     * @var float
+     */
+    public $tax;
+
+    /**
      * The quantity for this cart item.
      *
      * @var int|float
@@ -92,7 +99,7 @@ class CartItem implements Arrayable
         }
 
         if (!is_numeric($tax) || strlen($tax) < 0) {
-            throw new InvalidArgumentException('Please supply a valid total.');
+            throw new InvalidArgumentException('Please supply a valid tax.');
         }
 
         if (!is_numeric($total) || strlen($total) < 0) {
