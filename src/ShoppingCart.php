@@ -216,6 +216,18 @@ class ShoppingCart
     }
 
     /**
+     * Get total tax.
+     *
+     * @return float
+     */
+    public function getTotalTax()
+    {
+        return $this->content->sum(function (CartItem $cartItem) {
+            return $cartItem->getTax();
+        });
+    }
+
+    /**
      * Get total price with coupons.
      *
      * @return float
@@ -233,6 +245,27 @@ class ShoppingCart
         });
 
         return $totalWithCoupons;
+    }
+
+    /**
+     * Get total price with coupons and tax.
+     *
+     * @return float
+     */
+    public function getTotalWithTaxAndCoupons()
+    {
+        $total = $this->getTotal();
+        $tax = $this->getTotalTax();
+        $totalWithCoupons = $total;
+
+        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalWithCoupons) {
+            /**
+             * @var Coupon $coupon
+             */
+            $totalWithCoupons -= $coupon->apply($total);
+        });
+
+        return $totalWithCoupons + $tax;
     }
 
     /**
