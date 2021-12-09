@@ -74,14 +74,16 @@ class ShoppingCart
      * @param string|int $id
      * @param string $name
      * @param int|float $price
+     * @param int|float $tax
+     * @param int|float $total
      * @param int $quantity
      * @param array $options
      *
      * @return CartItem
      */
-    public function add($id, $name, $price, $quantity, $total, $options = [])
+    public function add($id, $name, $price, $quantity, $tax, $total, $options = [])
     {
-        $cartItem = new CartItem($id, $name, $price, $quantity, $total, $options);
+        $cartItem = new CartItem($id, $name, $price, $quantity, $tax, $total, $options);
         $uniqueId = $cartItem->getUniqueId();
 
         if ($this->content->has($uniqueId)) {
