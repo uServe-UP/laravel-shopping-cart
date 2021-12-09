@@ -281,6 +281,16 @@ class ShoppingCart
     }
 
     /**
+     * Add coupon.
+     *
+     * @param Coupon $coupon
+     */
+    public function removeCoupon(Coupon $coupon)
+    {
+        $this->coupons->pull($coupon);
+    }
+
+    /**
      * Get coupons.
      *
      * @return Collection
