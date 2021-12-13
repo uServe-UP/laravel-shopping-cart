@@ -230,6 +230,26 @@ class ShoppingCart
     }
 
     /**
+     * Get total coupons amount.
+     *
+     * @return float
+     */
+    public function getCouponsAmount()
+    {
+        $total = $this->getTotal();
+        $totalCoupons = 0;
+
+        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalCoupons) {
+            /**
+             * @var Coupon $coupon
+             */
+            $totalCoupons += $coupon->apply($total);
+        });
+
+        return $totalCoupons;
+    }
+
+    /**
      * Get total price with coupons.
      *
      * @return float
