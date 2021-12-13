@@ -274,7 +274,7 @@ class ShoppingCart
      *
      * @return float
      */
-    public function getTotalWithTaxAndCoupons()
+    public function getTotalWithTaxAndCoupons($fees = 0)
     {
         $total = $this->getTotal();
         $tax = $this->getTotalTax();
@@ -287,7 +287,7 @@ class ShoppingCart
             $totalWithCoupons -= $coupon->apply($total);
         });
 
-        return $totalWithCoupons + $tax;
+        return $totalWithCoupons + $tax + $fees;
     }
 
     /**
