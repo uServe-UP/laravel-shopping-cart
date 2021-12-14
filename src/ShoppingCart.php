@@ -210,7 +210,7 @@ class ShoppingCart
      *
      * @return float
      */
-    public function getTotal()
+    public function getSubtotal()
     {
         return $this->content->sum(function (CartItem $cartItem) {
             return $cartItem->getItemWithOptionTotal();
@@ -236,7 +236,7 @@ class ShoppingCart
      */
     public function getCouponsAmount()
     {
-        $total = $this->getTotal();
+        $total = $this->getSubtotal();
         $totalCoupons = 0;
 
         $this->coupons->each(function (Coupon $coupon) use ($total, &$totalCoupons) {
@@ -256,7 +256,7 @@ class ShoppingCart
      */
     public function getTotalWithCoupons()
     {
-        $total = $this->getTotal();
+        $total = $this->getSubtotal();
         $totalWithCoupons = $total;
 
         $this->coupons->each(function (Coupon $coupon) use ($total, &$totalWithCoupons) {
@@ -276,7 +276,7 @@ class ShoppingCart
      */
     public function getTotalWithTaxAndCoupons()
     {
-        $total = $this->getTotal();
+        $total = $this->getSubtotal();
         $tax = $this->getTotalTax();
         $totalWithCoupons = $total;
 
@@ -297,7 +297,7 @@ class ShoppingCart
      */
     public function getAmount($fees = 0)
     {
-        $total = $this->getTotal();
+        $total = $this->getSubtotal();
         $tax = $this->getTotalTax();
         $totalWithCoupons = $total;
 
