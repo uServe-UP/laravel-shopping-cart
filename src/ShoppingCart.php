@@ -368,6 +368,27 @@ class ShoppingCart
         return $this->instanceName;
     }
 
+    public function setCartExpireTime($id, $expireTime = 604800)
+    {
+        $this->repo->setExpireTime(
+            $id,
+            $this->instanceName,
+            $expireTime
+        );
+
+        return $this;
+    }
+
+    public function renameCart($name, $newName)
+    {
+        $this->repo->renameCart(
+            $name,
+            $newName
+        );
+
+        return $this;
+    }
+
     /**
      * Store the current instance of the cart.
      *
