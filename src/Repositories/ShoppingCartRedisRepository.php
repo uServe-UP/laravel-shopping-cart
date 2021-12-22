@@ -53,6 +53,14 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
         Redis::del($this->getKey($id, $instanceName));
     }
 
+    /**
+     * Remove shopping cart by its identifier and instance name.
+     *
+     * @param $id
+     * @param $instanceName
+     * @param int $expireTime
+     * @return mixed|void
+     */
     public function setExpireTime($id, $instanceName, $expireTime)
     {
         Redis::expire($this->getKey($id, $instanceName), $expireTime);
