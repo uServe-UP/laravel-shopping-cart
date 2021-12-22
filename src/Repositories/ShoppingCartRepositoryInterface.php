@@ -49,5 +49,5 @@ interface ShoppingCartRepositoryInterface
      * @param $newName
      * @return mixed
      */
-    public function renameCart($name,$newName);
+    public function renameCart($name, $newName, $instanceName);
 }
