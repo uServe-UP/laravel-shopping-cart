@@ -65,10 +65,12 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
      * @param $newName
      * @return mixed|void
      */
-    public function renameCart($name, $newName)
+    public function renameCart($name, $newName, $instanceName)
     {
-        if (!Redis::exists($name)) {
-            Redis::rename($name, $newName);
+        $key = $this->getKey($name, $instanceName);
+        if (!Redis::exists($key)) {
+            $newKey = $this->getKey($newName, $instanceName);
+            Redis::rename($key, $newKey);
         }
     }
 
