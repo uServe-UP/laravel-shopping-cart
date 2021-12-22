@@ -54,6 +54,29 @@ class ShoppingCartDatabaseRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Remove shopping cart by its identifier and instance name.
+     *
+     * @param string $id
+     * @param string $instanceName
+     */
+    public function setExpireTime($id, $instanceName, $expireTime)
+    {
+        return;
+    }
+
+    /**
+     * Rename Shopping cart
+     *
+     * @param $name
+     * @param $newName
+     * @return mixed|void
+     */
+    public function renameCart($name, $newName)
+    {
+        return;
+    }
+
+    /**
      * Create shopping cart instance.
      *
      * @param $id
