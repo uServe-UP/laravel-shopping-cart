@@ -384,8 +384,8 @@ class ShoppingCart
     {
         $this->repo->renameCart(
             $name,
-            $this->instanceName,
-            $newName
+            $newName,
+            $this->instanceName
         );
 
         return $this;
