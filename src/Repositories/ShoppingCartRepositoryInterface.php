@@ -42,11 +42,9 @@ interface ShoppingCartRepositoryInterface
     public function setExpireTime($id, $instanceName, $expireTime);
 
     /**
-     * Rename Cart
-     *
-     *
      * @param $name
      * @param $newName
+     * @param $instanceName
      * @return mixed
      */
     public function renameCart($name, $newName, $instanceName);
