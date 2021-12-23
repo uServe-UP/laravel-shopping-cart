@@ -369,6 +369,11 @@ class ShoppingCart
         return $this->instanceName;
     }
 
+    /**
+     * @param $id
+     * @param int $expireTime
+     * @return $this
+     */
     public function setCartExpireTime($id, $expireTime = 604800)
     {
         $this->repo->setExpireTime(
@@ -380,11 +385,17 @@ class ShoppingCart
         return $this;
     }
 
+    /**
+     * @param $name
+     * @param $newName
+     * @return $this
+     */
     public function renameCart($name, $newName)
     {
         $this->repo->renameCart(
             $name,
-            $newName
+            $newName,
+            $this->instanceName
         );
 
         return $this;
