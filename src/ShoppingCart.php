@@ -325,18 +325,9 @@ class ShoppingCart
      */
     public function getAmount($fees = 0)
     {
-        $total = $this->getSubtotal();
-        $tax = $this->getTotalTax();
-        $totalWithCoupons = $total;
+        $total = $this->getTotalWithTaxAndCoupons();
 
-        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalWithCoupons) {
-            /**
-             * @var Coupon $coupon
-             */
-            $totalWithCoupons -= $coupon->apply($total);
-        });
-
-        return $totalWithCoupons + $tax + $fees;
+        return $total + $fees;
     }
 
     /**
