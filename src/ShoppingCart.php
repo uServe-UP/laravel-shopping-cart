@@ -52,6 +52,13 @@ class ShoppingCart
     private $storeInfo;
 
     /**
+     * Delivery Infomations.
+     *
+     * @var Collection
+     */
+    private $deliveryInfo;
+
+    /**
      * ShoppingCart constructor.
      *
      * @param ShoppingCartRepositoryInterface $repo
@@ -63,6 +70,7 @@ class ShoppingCart
         $this->content = new Collection();
         $this->coupons = new Collection();
         $this->storeInfo = new Collection();
+        $this->deliveryInfo = new Collection();
     }
 
     /**
@@ -165,6 +173,25 @@ class ShoppingCart
     public function setStoreInfo($storeInfo)
     {
         $this->storeInfo = $storeInfo;
+    }
+
+    /**
+     * Get delivery content.
+     *
+     * @return Collection
+     */
+    public function deliveryInfo()
+    {
+        return $this->deliveryInfo;
+    }
+
+    /**
+     * Get the store infomations.
+     * @param $deliveryInfo
+     */
+    public function setDeliveryInfo($deliveryInfo)
+    {
+        $this->deliveryInfo = $deliveryInfo;
     }
 
     /**
@@ -417,6 +444,7 @@ class ShoppingCart
                 'content' => $this->content,
                 'coupons' => $this->coupons,
                 'store-info' => $this->storeInfo,
+                'delivery-info' => $this->deliveryInfo,
             ]))
         );
 
@@ -443,6 +471,7 @@ class ShoppingCart
         $this->content = $unserialized['content'];
         $this->coupons = $unserialized['coupons'];
         $this->storeInfo = $unserialized['store-info'];
+        $this->deliveryInfo = $unserialized['delivery-info'];
 
         $this->instance($cart->instance);
 
