@@ -61,7 +61,7 @@ class ShoppingCart
     /**
      * Tips Infomations.
      *
-     * @var Collection
+     * @var float
      */
     private $tips;
 
@@ -78,7 +78,7 @@ class ShoppingCart
         $this->coupons = new Collection();
         $this->storeInfo = new Collection();
         $this->deliveryInfo = new Collection();
-        $this->tips = new Collection();
+        $this->tips = 0;
     }
 
     /**
