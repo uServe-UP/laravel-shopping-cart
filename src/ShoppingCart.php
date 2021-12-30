@@ -59,6 +59,13 @@ class ShoppingCart
     private $deliveryInfo;
 
     /**
+     * Tips Infomations.
+     *
+     * @var Collection
+     */
+    private $tips;
+
+    /**
      * ShoppingCart constructor.
      *
      * @param ShoppingCartRepositoryInterface $repo
@@ -71,6 +78,7 @@ class ShoppingCart
         $this->coupons = new Collection();
         $this->storeInfo = new Collection();
         $this->deliveryInfo = new Collection();
+        $this->tips = new Collection();
     }
 
     /**
@@ -186,12 +194,21 @@ class ShoppingCart
     }
 
     /**
-     * Get the store infomations.
+     * Set the store infomations.
      * @param $deliveryInfo
      */
     public function setDeliveryInfo($deliveryInfo)
     {
         $this->deliveryInfo = $deliveryInfo;
+    }
+
+    /**
+     * Set the tips infomations.
+     * @param $deliveryInfo
+     */
+    public function setTips($tips)
+    {
+        $this->tips = $tips;
     }
 
     /**
@@ -319,6 +336,16 @@ class ShoppingCart
     }
 
     /**
+     * Get tips.
+     *
+     * @return float
+     */
+    public function getTips()
+    {
+        return $this->tips;
+    }
+
+    /**
      * Get total price with coupons and tax and ohter fees.
      *
      * @return float
@@ -436,6 +463,7 @@ class ShoppingCart
                 'coupons' => $this->coupons,
                 'store-info' => $this->storeInfo,
                 'delivery-info' => $this->deliveryInfo,
+                'tips' => $this->tips,
             ]))
         );
 
@@ -463,6 +491,7 @@ class ShoppingCart
         $this->coupons = $unserialized['coupons'];
         $this->storeInfo = $unserialized['store-info'];
         $this->deliveryInfo = $unserialized['delivery-info'];
+        $this->tips = $unserialized['tips'];
 
         $this->instance($cart->instance);
 
