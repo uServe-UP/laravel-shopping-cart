@@ -59,6 +59,13 @@ class ShoppingCart
     private $deliveryInfo;
 
     /**
+     * params Infomations.
+     *
+     * @var Collection
+     */
+    private $params;
+
+    /**
      * Tips Infomations.
      *
      * @var float
@@ -78,6 +85,7 @@ class ShoppingCart
         $this->coupons = new Collection();
         $this->storeInfo = new Collection();
         $this->deliveryInfo = new Collection();
+        $this->params = new Collection();
         $this->tips = 0;
     }
 
@@ -188,7 +196,7 @@ class ShoppingCart
      *
      * @return Collection
      */
-    public function deliveryInfo()
+    public function getDeliveryInfo()
     {
         return $this->deliveryInfo;
     }
@@ -203,8 +211,28 @@ class ShoppingCart
     }
 
     /**
+     * Get delivery content.
+     *
+     * @return Collection
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * Set the store infomations.
+     * @param $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
+
+    /**
+     *
      * Set the tips infomations.
-     * @param $deliveryInfo
+     * @param $tips
      */
     public function setTips($tips)
     {
@@ -463,6 +491,7 @@ class ShoppingCart
                 'coupons' => $this->coupons,
                 'store-info' => $this->storeInfo,
                 'delivery-info' => $this->deliveryInfo,
+                'params' => $this->params,
                 'tips' => $this->tips,
             ]))
         );
@@ -491,6 +520,7 @@ class ShoppingCart
         $this->coupons = $unserialized['coupons'];
         $this->storeInfo = $unserialized['store-info'];
         $this->deliveryInfo = $unserialized['delivery-info'];
+        $this->params = $unserialized['params'];
         $this->tips = $unserialized['tips'];
 
         $this->instance($cart->instance);
