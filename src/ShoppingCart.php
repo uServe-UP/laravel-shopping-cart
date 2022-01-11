@@ -2,6 +2,7 @@
 
 namespace Sky2002\ShoppingCart;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Sky2002\ShoppingCart\Coupons\Coupon;
 use Sky2002\ShoppingCart\Repositories\ShoppingCartRepositoryInterface;
@@ -71,6 +72,12 @@ class ShoppingCart
      * @var float
      */
     private $tips;
+    /**
+     * Fees Infomations.
+     *
+     * @var Collection
+     */
+    private $feesAmountList;
 
     /**
      * ShoppingCart constructor.
@@ -86,6 +93,7 @@ class ShoppingCart
         $this->storeInfo = new Collection();
         $this->deliveryInfo = new Collection();
         $this->params = new Collection();
+        $this->feesAmountList = new Collection();
         $this->tips = 0;
     }
 
@@ -240,6 +248,16 @@ class ShoppingCart
     }
 
     /**
+     *
+     * Set the fees infomations.
+     * @param float $feesList
+     */
+    public function setFeesAmountList($feesList)
+    {
+        $this->feesAmountList = $feesList;
+    }
+
+    /**
      * Get the quantity of the cart item with specified unique id.
      *
      * @param $uniqueId
@@ -309,10 +327,20 @@ class ShoppingCart
      */
     public function getCouponsAmount()
     {
-        $total = $this->getSubtotal();
         $totalCoupons = 0;
 
-        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalCoupons) {
+        $this->coupons->each(function (Coupon $coupon) use (&$totalCoupons) {
+            $subtotal = $this->getSubtotal();
+            $tax = $this->getTotalTax();
+            $feesList = $this->getFeesAmountList();
+            $range = $coupon->getRange();
+            $total = $subtotal + $tax;
+
+            foreach ($feesList as $key => $value) {
+                if ((is_bool($range) && $range == true) || Arr::exists($range,$key))
+                    $total += $value;
+            }
+
             /**
              * @var Coupon $coupon
              */
@@ -323,44 +351,18 @@ class ShoppingCart
     }
 
     /**
-     * Get total price with coupons.
-     *
-     * @return float
-     */
-    public function getTotalWithCoupons()
-    {
-        $total = $this->getSubtotal();
-        $totalWithCoupons = $total;
-
-        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalWithCoupons) {
-            /**
-             * @var Coupon $coupon
-             */
-            $totalWithCoupons -= $coupon->apply($total);
-        });
-
-        return $totalWithCoupons;
-    }
-
-    /**
      * Get total price with coupons and tax.
      *
      * @return float
      */
-    public function getTotalWithTaxAndCoupons()
+    public function getSubtotalWithTax()
     {
-        $total = $this->getSubtotal();
+        $subtotal = $this->getSubtotal();
         $tax = $this->getTotalTax();
-        $totalWithCoupons = $total;
 
-        $this->coupons->each(function (Coupon $coupon) use ($total, &$totalWithCoupons) {
-            /**
-             * @var Coupon $coupon
-             */
-            $totalWithCoupons -= $coupon->apply($total);
-        });
+        $total = $subtotal + $tax;
 
-        return $totalWithCoupons + $tax;
+        return $total;
     }
 
     /**
@@ -374,15 +376,47 @@ class ShoppingCart
     }
 
     /**
+     * Get fees.
+     *
+     * @return float
+     */
+    public function getFeesAmountList()
+    {
+        return $this->feesAmountList;
+    }
+
+    /**
+     * Get fees.
+     *
+     * @return float
+     */
+    public function getFeesAmount()
+    {
+        $amount = 0;
+        foreach ($this->feesAmountList as $value) {
+            if (is_numeric($value))
+                $amount += $value;
+        }
+
+        return $amount;
+    }
+
+    /**
      * Get total price with coupons and tax and ohter fees.
      *
      * @return float
      */
-    public function getAmount($fees = 0)
+    public function getAmount()
     {
-        $total = $this->getTotalWithTaxAndCoupons();
+        $subtotal = $this->getSubtotalWithTax();
+        $feesAmount = $this->getFeesAmount();
+        $couponTotal = $this->getCouponsAmount();
 
-        return $total + $fees;
+        $totalWithCoupons = $subtotal + $feesAmount - $couponTotal;
+
+        $total = $totalWithCoupons >= 0 ? $totalWithCoupons : 0;
+
+        return $total + $tips;
     }
 
     /**
@@ -491,8 +525,10 @@ class ShoppingCart
                 'coupons' => $this->coupons,
                 'store-info' => $this->storeInfo,
                 'delivery-info' => $this->deliveryInfo,
+                'fees-amount-list' => $this->feesAmountList,
                 'params' => $this->params,
                 'tips' => $this->tips,
+
             ]))
         );
 
@@ -520,6 +556,7 @@ class ShoppingCart
         $this->coupons = $unserialized['coupons'];
         $this->storeInfo = $unserialized['store-info'];
         $this->deliveryInfo = $unserialized['delivery-info'];
+        $this->feesAmountList = $unserialized['fees-amount-list'];
         $this->params = $unserialized['params'];
         $this->tips = $unserialized['tips'];
 
