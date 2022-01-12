@@ -416,7 +416,7 @@ class ShoppingCart
 
         $total = $totalWithCoupons >= 0 ? $totalWithCoupons : 0;
 
-        return $total + $this->tips;
+        return $total;
     }
 
     /**
