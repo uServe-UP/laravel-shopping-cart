@@ -450,6 +450,18 @@ class ShoppingCart
     }
 
     /**
+     * Check is Coupon exist.
+     *
+     * @param Coupon $coupon
+     *
+     * @return bool
+     */
+    public function hasCoupon(Coupon $coupon)
+    {
+        $this->coupons->has($coupon);
+    }
+
+    /**
      * Set shopping cart instance name.
      *
      * @param string $name
