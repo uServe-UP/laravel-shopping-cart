@@ -250,7 +250,7 @@ class ShoppingCart
     /**
      *
      * Set the fees infomations.
-     * @param float $feesList
+     * @param array $feesList
      */
     public function setFeesAmountList($feesList)
     {
@@ -337,7 +337,7 @@ class ShoppingCart
             $total = $subtotal + $tax;
 
             foreach ($feesList as $key => $value) {
-                if ((is_bool($range) && $range == true) || Arr::exists($range,$key))
+                if ((is_bool($range) && $range == true) || (is_array($range) && Arr::exists($range,$key)))
                     $total += $value;
             }
 
