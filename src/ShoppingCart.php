@@ -458,7 +458,7 @@ class ShoppingCart
      */
     public function hasCoupon(Coupon $coupon)
     {
-        $this->coupons->has($coupon);
+       return $this->coupons->contains($coupon);
     }
 
     /**
