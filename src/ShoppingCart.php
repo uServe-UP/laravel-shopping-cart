@@ -337,7 +337,7 @@ class ShoppingCart
             $total = $subtotal + $tax;
 
             foreach ($feesList as $key => $value) {
-                if ((is_bool($range) && $range == true) || (is_array($range) && Arr::exists($range,$key)))
+                if ((is_bool($range) && $range == true) || (is_array($range) && Arr::exists($range, $key)))
                     $total += $value;
             }
 
@@ -436,7 +436,10 @@ class ShoppingCart
      */
     public function removeCoupon(Coupon $coupon)
     {
-        $this->coupons->pull($coupon);
+        $key = $this->coupons->search(function ($couponList) use ($coupon) {
+            return $couponList->name == $couponList->name;
+        });
+        return $this->coupons->pull($key);
     }
 
     /**
@@ -458,7 +461,7 @@ class ShoppingCart
      */
     public function hasCoupon(Coupon $coupon)
     {
-       return $this->coupons->contains($coupon);
+        return $this->coupons->contains($coupon);
     }
 
     /**
