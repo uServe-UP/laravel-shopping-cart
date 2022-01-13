@@ -31,7 +31,7 @@ class PercentDiscountCoupon extends Coupon
     /**
      * @return array
      */
-    public function getrRange(){
+    public function getRange(){
         return $this->range;
     }
 
