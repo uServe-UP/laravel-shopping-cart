@@ -31,7 +31,7 @@ class FixedDiscountCoupon extends Coupon
     /**
      * @return array
      */
-    public function getrRange(){
+    public function getRange(){
         return $this->range;
     }
 
