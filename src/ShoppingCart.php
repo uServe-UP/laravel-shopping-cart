@@ -541,7 +541,7 @@ class ShoppingCart
                 'store-info' => $this->storeInfo,
                 'delivery-info' => $this->deliveryInfo,
                 'fees-amount-list' => $this->feesAmountList,
-                'order-params' => $this->params,
+                'params' => $this->params,
                 'tips' => $this->tips,
 
             ]))
@@ -572,7 +572,7 @@ class ShoppingCart
         $this->storeInfo = $unserialized['store-info'];
         $this->deliveryInfo = $unserialized['delivery-info'];
         $this->feesAmountList = $unserialized['fees-amount-list'];
-        $this->params = $unserialized['order-params'];
+        $this->params = $unserialized['params'];
         $this->tips = $unserialized['tips'];
 
         $this->instance($cart->instance);
