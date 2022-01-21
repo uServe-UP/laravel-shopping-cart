@@ -16,13 +16,14 @@ class PercentDiscountCoupon extends Coupon
     /**
      * PercentCoupon constructor.
      *
+     * @param int $id
      * @param string $name
      * @param float  $discount
      * @param array $range
      */
-    public function __construct($name, $discount, $range)
+    public function __construct($id, $name, $discount, $range)
     {
-        parent::__construct($name);
+        parent::__construct($id, $name);
 
         $this->percent = $discount;
         $this->range = $range;
