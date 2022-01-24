@@ -284,6 +284,20 @@ class ShoppingCart
     public function clear()
     {
         $this->content = new Collection();
+        $this->coupons = new Collection();
+        $this->storeInfo = new Collection();
+        $this->deliveryInfo = new Collection();
+        $this->params = new Collection();
+        $this->feesAmountList = new Collection();
+        $this->tips = 0;
+    }
+
+    /**
+     * Clear shopping cart.
+     */
+    public function clearCoupons()
+    {
+        $this->coupons = new Collection();
     }
 
     /**
