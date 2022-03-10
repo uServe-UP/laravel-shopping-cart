@@ -7,6 +7,11 @@ use stdClass;
 
 class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
 {
+    public function __construct()
+    {
+        Redis::select($this->getDatabase());
+    }
+
     /**
      * Save shopping cart.
      *
@@ -92,6 +97,26 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
      */
     protected function getKey($id, $instanceName)
     {
-        return sprintf('%s.%s', $id, $instanceName);
+        return sprintf('%s:%s.%s', $this->getTableName(), $id, $instanceName);
+    }
+
+    /**
+     * Get the database table name.
+     *
+     * @return string
+     */
+    private function getTableName()
+    {
+        return config('shopping-cart.redis.table', 'shopping_cart');
+    }
+
+    /**
+     * Get the database.
+     *
+     * @return string
+     */
+    private function getDatabase()
+    {
+        return config('shopping-cart.redis.database', 0);
     }
 }
