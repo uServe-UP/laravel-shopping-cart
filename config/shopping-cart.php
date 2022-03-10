@@ -27,10 +27,12 @@ return [
     */
 
     'database' => [
-
         'connection' => null,
-
         'table' => 'shopping_cart',
+    ],
 
+    'redis' => [
+        'database' => 0,
+        'table' => 'shopping_cart',
     ],
 ];
