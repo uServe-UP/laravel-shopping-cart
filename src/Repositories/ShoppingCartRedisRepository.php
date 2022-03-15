@@ -88,6 +88,29 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Get orders from redis
+     *
+     * @param $key
+     * @param int $expire
+     */
+    public function getOrders($key, $expire = 2678400)
+    {
+        $result = [];
+        $orderLength = Redis::llen($key);
+        if ($orderLength > 0) {
+            $len = $orderLength - 1;
+            $response = Redis::lrange($key, 0, $len);
+            foreach ($response as $item) {
+                $result[] = json_decode($item, true);
+            }
+            Redis::ltrim($key, $orderLength, -1);
+            Redis::expire($key, $expire);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get the key to store shopping cart.
      *
      * @param $id
