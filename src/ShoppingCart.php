@@ -603,4 +603,15 @@ class ShoppingCart
     {
         $this->repo->remove($id, $this->instanceName);
     }
+
+    /**
+     * Get orders from redis
+     *
+     * @param $key
+     * @param int $expire
+     */
+    public function getOrders($key, $expire = 2678400)
+    {
+        $this->repo->getOrders($key, $expire);
+    }
 }
