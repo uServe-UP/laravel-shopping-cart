@@ -9,7 +9,7 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
 {
     public function __construct()
     {
-        Redis::select($this->getDatabase());
+        //Redis::select($this->getDatabase());
     }
 
     /**
