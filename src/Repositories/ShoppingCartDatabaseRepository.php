@@ -73,9 +73,10 @@ class ShoppingCartDatabaseRepository implements ShoppingCartRepositoryInterface
      * @param $newName
      * @return mixed|void
      */
-    public function renameCart($name, $newName)
+    public function renameCart($name, $newName, $instanceName)
     {
-        return;
+        $result = [];
+        return $result;
     }
 
     /**
@@ -158,5 +159,19 @@ class ShoppingCartDatabaseRepository implements ShoppingCartRepositoryInterface
         $connection = config('shopping-cart.database.connection');
 
         return is_null($connection) ? config('database.default') : $connection;
+    }
+
+    /**
+     * Get orders from redis
+     *
+     * @param $key
+     * @param int $expire
+     */
+    public function getOrders($key, $expire = 2678400)
+    {
+        $result = [];
+
+
+        return $result;
     }
 }
