@@ -612,6 +612,6 @@ class ShoppingCart
      */
     public function getOrders($key, $expire = 2678400)
     {
-        $this->repo->getOrders($key, $expire);
+        return $this->repo->getOrders($key, $expire);
     }
 }
