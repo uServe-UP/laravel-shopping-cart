@@ -425,8 +425,9 @@ class ShoppingCart
         $subtotal = $this->getSubtotalWithTax();
         $feesAmount = $this->getFeesAmount();
         $couponTotal = $this->getCouponsAmount();
+        $tips = $this->getTips();
 
-        $totalWithCoupons = $subtotal + $feesAmount - $couponTotal;
+        $totalWithCoupons = $subtotal + $feesAmount + $tips - $couponTotal;
 
         $total = $totalWithCoupons >= 0 ? $totalWithCoupons : 0;
 
