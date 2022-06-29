@@ -121,6 +121,7 @@ class ShoppingCart
         if ($this->content->has($uniqueId)) {
             $cartItem->quantity += $this->content->get($uniqueId)->quantity;
             $cartItem->total += $this->content->get($uniqueId)->total;
+            $cartItem->tax += $this->content->get($uniqueId)->tax;
         }
 
         $this->content->put($uniqueId, $cartItem);
