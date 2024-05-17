@@ -616,4 +616,28 @@ class ShoppingCart
     {
         return $this->repo->getOrders($key, $expire);
     }
+
+    /**
+     * Get orders from redis
+     *
+     * @param $key
+     * @param int $expire
+     */
+    public function getAndKeepOrders($key, $expire = 2678400)
+    {
+        return $this->repo->getAndKeepOrders($key, $expire);
+    }
+
+    /**
+     * Delete a specified number of orders from Redis while keeping the rest
+     *
+     * @param string $key
+     * @param int $deleteLength Number of orders to delete
+     * @param int $expire Expiry time for the key in seconds
+     * @return void
+     */
+    public function deleteOrders($key, $deleteLength = 1, $expire = 2678400)
+    {
+        return $this->repo->deleteOrders($key, $deleteLength, $expire);
+    }
 }
