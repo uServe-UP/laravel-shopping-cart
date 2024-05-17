@@ -111,6 +111,52 @@ class ShoppingCartRedisRepository implements ShoppingCartRepositoryInterface
     }
 
     /**
+     * Get orders from redis
+     *
+     * @param $key
+     * @param int $expire
+     */
+    public function getAndKeepOrders($key, $expire = 2678400)
+    {
+        $result = [];
+        $orderLength = Redis::llen($key);
+        if ($orderLength > 0) {
+            $len = $orderLength - 1;
+            $response = Redis::lrange($key, 0, $len);
+            foreach ($response as $item) {
+                $result[] = json_decode($item, true);
+            }
+            //Redis::ltrim($key, $orderLength, -1);
+            Redis::expire($key, $expire);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Delete a specified number of orders from Redis while keeping the rest
+     *
+     * @param string $key
+     * @param int $deleteLength Number of orders to delete
+     * @param int $expire Expiry time for the key in seconds
+     * @return void
+     */
+    public function deleteOrders($key, $deleteLength, $expire = 2678400)
+    {
+        // 获取列表的总长度
+        $orderLength = Redis::llen($key);
+
+        // 如果列表长度大于要删除的长度
+        if ($orderLength > $deleteLength) {
+            // 保留从 deleteLength 到列表末尾的元素，删除其余的元素
+            Redis::ltrim($key, $deleteLength, -1);
+        }
+
+        // 设置键的过期时间
+        Redis::expire($key, $expire);
+    }
+
+    /**
      * Get the key to store shopping cart.
      *
      * @param $id
